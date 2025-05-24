@@ -1,5 +1,4 @@
-# portfolio-merban-ali
-A showcase of my skills, projects, and progress.
+
 # Merban Ali's Digital Portfolio
 
 Welcome to my professional portfolio repository. Here, I showcase my work, experience, and continuous learning in digital marketing, SEO, and related areas.
