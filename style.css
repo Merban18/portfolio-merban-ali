@@ -20,3 +20,41 @@
 @media(max-width:520px){.container{width:min(100% - 30px,1180px)}.hero h1,.section h2,.contact-grid h2{font-size:40px;letter-spacing:-2.5px}.lead{font-size:16px}.quick-stats{gap:18px}.quick-stats small{font-size:9px}.service-grid{grid-template-columns:1fr}.project-visual{height:210px}.timeline-list>article{grid-template-columns:1fr;gap:8px}.section{padding:82px 0}.profile-note{left:8px}.ticker-inner{justify-content:flex-start;white-space:nowrap}footer .container{flex-direction:column;gap:8px}.about-grid{gap:45px}.contact-section{padding:82px 0}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal,.stagger>*{opacity:1;transform:none}}
 .hero-kicker{font-size:10px;font-weight:800;letter-spacing:2.8px;color:#68756e;margin:-2px 0 15px}.hero-kicker span{color:#8b7cff;margin:0 5px}.hero-actions .btn span{font-size:16px;transition:.3s}.hero-actions .btn:hover span{transform:translate(3px,-3px)}.hero-orbit{position:absolute;right:39%;bottom:12%;width:135px;height:135px;border:1px dashed rgba(139,124,255,.35);border-radius:50%;animation:spin 18s linear infinite;pointer-events:none}.hero-orbit span{position:absolute;background:#101311;color:#fff;border-radius:999px;padding:5px 8px;font-size:7px;font-weight:800;letter-spacing:1px;box-shadow:0 6px 15px rgba(0,0,0,.12)}.hero-orbit span:nth-child(1){top:-7px;left:52px}.hero-orbit span:nth-child(2){right:-22px;top:56px}.hero-orbit span:nth-child(3){bottom:-8px;left:26px}.hero-orbit span:nth-child(4){left:-20px;top:55px}.profile-note em{position:absolute;right:12px;top:9px;font:700 9px Manrope;color:#68776f;font-style:normal}@keyframes spin{to{transform:rotate(360deg)}}@media(max-width:900px){.hero-orbit{right:5%;bottom:7%}}@media(max-width:520px){.hero-orbit{width:105px;height:105px;right:0;bottom:4%}}
+/* --- HERO WOW LAYER --- */
+.hero{isolation:isolate;overflow:visible}
+.hero-copy{position:relative;z-index:4}
+.hero-card{z-index:3;min-height:560px;display:flex;align-items:center;justify-content:center}
+.portrait-frame{width:min(390px,100%);position:relative;z-index:3;transform:rotate(2deg);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.hero-card:hover .portrait-frame{transform:rotate(0deg) scale(1.015)}
+.hero-card:after{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:conic-gradient(from 0deg,rgba(84,224,177,.0),rgba(84,224,177,.32),rgba(139,124,255,.35),rgba(84,224,177,0));filter:blur(24px);animation:heroGlow 5s ease-in-out infinite;z-index:0}
+.floating-tech{position:absolute;z-index:7;background:rgba(13,17,15,.94);color:#fff;border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 45px rgba(0,0,0,.2);backdrop-filter:blur(12px);border-radius:999px;padding:11px 15px;font-size:10px;font-weight:800;letter-spacing:1px;white-space:nowrap}
+.floating-tech span{color:var(--accent)}
+.tech-ai{top:13%;left:0;animation:floatOne 4s ease-in-out infinite}
+.tech-seo{top:29%;right:-5%;animation:floatTwo 4.6s ease-in-out infinite}
+.tech-auto{bottom:22%;left:-8%;animation:floatThree 5s ease-in-out infinite}
+.tech-web{bottom:9%;right:4%;animation:floatOne 4.3s ease-in-out infinite reverse}
+.hero-ring{position:absolute;border:1px solid rgba(139,124,255,.3);border-radius:50%;pointer-events:none;z-index:1}
+.ring-one{width:470px;height:470px;animation:ringSpin 22s linear infinite}
+.ring-two{width:540px;height:540px;border-style:dashed;border-color:rgba(84,224,177,.17);animation:ringSpin 30s linear infinite reverse}
+.hero-orbit{display:none}
+.hero-kicker{opacity:.8}
+@keyframes heroGlow{0%,100%{transform:scale(.88) rotate(0deg);opacity:.65}50%{transform:scale(1.08) rotate(180deg);opacity:1}}
+@keyframes floatOne{0%,100%{transform:translate3d(0,0,0) rotate(-2deg)}50%{transform:translate3d(0,-14px,0) rotate(2deg)}}
+@keyframes floatTwo{0%,100%{transform:translate3d(0,0,0) rotate(2deg)}50%{transform:translate3d(9px,-10px,0) rotate(-2deg)}}
+@keyframes floatThree{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-5px,12px,0)}}
+@keyframes ringSpin{to{transform:rotate(360deg)}}
+@media(max-width:900px){
+ .hero-card{min-height:500px}
+ .floating-tech{font-size:8px;padding:9px 11px}
+ .tech-ai{left:2%}.tech-seo{right:0}.tech-auto{left:0}.tech-web{right:3%}
+ .ring-one{width:390px;height:390px}.ring-two{width:450px;height:450px}
+}
+@media(max-width:520px){
+ .hero-card{min-height:430px}
+ .portrait-frame{width:82%}
+ .tech-ai{top:6%;left:0}.tech-seo{top:25%;right:-3%}.tech-auto{bottom:20%;left:-2%}.tech-web{bottom:7%;right:0}
+ .ring-one{width:320px;height:320px}.ring-two{width:370px;height:370px}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-card:after,.floating-tech,.hero-ring{animation:none!important}
+}
