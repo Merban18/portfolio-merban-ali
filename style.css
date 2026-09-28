@@ -58,3 +58,301 @@
 @media(prefers-reduced-motion:reduce){
  .hero-card:after,.floating-tech,.hero-ring{animation:none!important}
 }
+
+/* --- POLISHED INTERACTION LAYER --- */
+:root{
+  --bg:#f3f5f1;
+  --surface:#ffffff;
+  --ink:#0b100e;
+  --muted:#647069;
+  --line:#dce2dc;
+  --dark:#09100d;
+  --dark2:#121a16;
+  --accent:#55e0b2;
+  --accent2:#8d7cff;
+  --soft-accent:rgba(85,224,178,.12);
+  --soft-purple:rgba(141,124,255,.10);
+}
+body{
+  background:
+    radial-gradient(circle at 8% 8%,rgba(85,224,178,.09),transparent 25%),
+    radial-gradient(circle at 92% 18%,rgba(141,124,255,.08),transparent 27%),
+    var(--bg);
+}
+.hero{
+  min-height:calc(100vh - 74px);
+}
+.availability-front{
+  width:max-content;
+  max-width:100%;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+  margin:0 0 24px;
+  padding:9px 13px 9px 10px;
+  border:1px solid rgba(85,224,178,.35);
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  box-shadow:0 12px 30px rgba(25,40,32,.07);
+  backdrop-filter:blur(14px);
+  animation:availabilityIn .8s .05s both,availabilityFloat 5s 1.2s ease-in-out infinite;
+}
+.availability-front .availability-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 5px rgba(85,224,178,.12),0 0 18px rgba(85,224,178,.45);
+  animation:availabilityPulse 2s infinite;
+}
+.availability-front span:not(.availability-dot){
+  font-size:9px;letter-spacing:1.7px;font-weight:800;color:#647069;
+}
+.availability-front strong{
+  font-size:10px;letter-spacing:.1px;color:#17201b;
+}
+.ticker{
+  border-top:1px solid rgba(255,255,255,.07);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.ticker-track{
+  display:flex;
+  width:max-content;
+  min-width:200%;
+  animation:marquee 24s linear infinite;
+}
+.ticker-inner{
+  width:max-content;
+  min-width:50vw;
+  justify-content:flex-start;
+  gap:24px;
+  padding:18px 24px;
+  white-space:nowrap;
+}
+.ticker-inner i{
+  font-size:9px;
+  opacity:.8;
+}
+.ticker:hover .ticker-track{animation-play-state:paused}
+
+/* Give the portrait a more intentional art-directed frame. */
+.hero-card{
+  filter:drop-shadow(0 24px 45px rgba(12,22,17,.08));
+}
+.portrait-frame{
+  border-radius:30px 30px 30px 8px;
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:
+    18px 18px 0 rgba(85,224,178,.16),
+    -10px -10px 0 rgba(141,124,255,.10),
+    0 30px 75px rgba(15,25,20,.16);
+  clip-path:polygon(0 0,100% 0,100% 92%,92% 100%,0 100%);
+}
+.portrait-frame:before{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border:1px solid rgba(255,255,255,.38);
+  border-radius:20px 20px 20px 4px;
+  z-index:2;
+  pointer-events:none;
+}
+.portrait-frame:after{
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.08),transparent 30%),
+    linear-gradient(315deg,rgba(85,224,178,.16),transparent 45%),
+    linear-gradient(135deg,transparent 52%,rgba(141,124,255,.12));
+  mix-blend-mode:screen;
+}
+.hero-card:before{
+  border-radius:28px 10px 28px 28px;
+  border-color:rgba(141,124,255,.24);
+  transform:rotate(4deg) translate(5px,5px);
+}
+.hero-card:after{
+  width:390px;height:390px;
+}
+.floating-tech{
+  transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;
+}
+.floating-tech:hover{
+  transform:translateY(-7px) scale(1.06)!important;
+  border-color:rgba(85,224,178,.6);
+  box-shadow:0 20px 55px rgba(0,0,0,.28),0 0 0 5px rgba(85,224,178,.06);
+}
+
+/* Services: more depth, less "flat grid". */
+.service-grid{
+  background:linear-gradient(135deg,rgba(85,224,178,.035),rgba(141,124,255,.035));
+  box-shadow:0 35px 90px rgba(0,0,0,.18);
+}
+.service-grid article{
+  overflow:hidden;
+  min-height:270px;
+}
+.service-grid article:before{
+  content:"";
+  position:absolute;
+  width:120px;height:120px;border-radius:50%;
+  right:-45px;bottom:-55px;
+  border:1px solid rgba(85,224,178,.16);
+  transition:.5s ease;
+}
+.service-grid article:after{
+  content:"↗";
+  position:absolute;
+  top:27px;right:29px;
+  font-size:17px;color:#52645b;
+  opacity:0;
+  transform:translate(-6px,6px);
+  transition:.35s ease;
+}
+.service-grid article:hover{
+  transform:translateY(-7px);
+  background:
+    radial-gradient(circle at 90% 10%,rgba(85,224,178,.14),transparent 32%),
+    linear-gradient(135deg,rgba(255,255,255,.045),transparent);
+}
+.service-grid article:hover:before{transform:scale(2.1);border-color:rgba(85,224,178,.28)}
+.service-grid article:hover:after{opacity:1;transform:none}
+.service-grid h3{transition:.35s ease}
+.service-grid article:hover h3{transform:translateX(5px);color:#8ff0cd}
+.service-grid span{transition:.35s ease}
+.service-grid article:hover span{color:#a4b9af}
+
+/* Work cards: cinematic hover rather than only a vertical lift. */
+.work-grid{perspective:1200px}
+.project{
+  position:relative;
+  transform-style:preserve-3d;
+}
+.project:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:18px;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.38) 48%,transparent 66%);
+  transform:translateX(-130%);
+  transition:transform .8s ease;
+}
+.project:hover:after{transform:translateX(130%)}
+.project:hover{transform:translateY(-10px) rotateX(1.5deg) rotateY(-.5deg)}
+.project-visual{background-position:center;transition:background .5s ease}
+.project:hover .project-visual{filter:saturate(1.08) contrast(1.02)}
+.project h3{transition:transform .35s ease}
+.project:hover h3{transform:translateX(4px)}
+
+/* Skills: make each tool feel interactive, with a glow/ripple on hover. */
+.skills-section{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 12% 18%,rgba(85,224,178,.15),transparent 28%),
+    radial-gradient(circle at 88% 82%,rgba(141,124,255,.13),transparent 31%),
+    linear-gradient(135deg,#edf2ee 0%,#e7ece8 48%,#f0edf6 100%);
+}
+.skills-section:before{
+  content:"";
+  position:absolute;
+  width:520px;height:520px;border-radius:50%;
+  right:-260px;top:-240px;
+  border:1px solid rgba(141,124,255,.15);
+  box-shadow:0 0 0 60px rgba(141,124,255,.025),0 0 0 120px rgba(85,224,178,.025);
+  animation:skillOrb 18s linear infinite;
+}
+.skill-columns{position:relative;z-index:1}
+.skill-group{
+  position:relative;
+  padding:25px 0 8px;
+}
+.skill-group h3{
+  display:flex;align-items:center;gap:10px;
+}
+.skill-group h3:before{
+  content:"";
+  width:24px;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transform-origin:left;
+  transition:transform .5s ease;
+}
+.skill-group:hover h3:before{transform:scaleX(1.7)}
+.skill-tags span{
+  position:relative;
+  overflow:hidden;
+  cursor:default;
+  background:rgba(255,255,255,.62);
+  border-color:rgba(176,188,180,.58);
+  box-shadow:0 5px 18px rgba(24,35,29,.035);
+  transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .3s,background .3s;
+}
+.skill-tags span:before{
+  content:"";
+  position:absolute;
+  width:0;height:0;border-radius:50%;
+  left:50%;top:50%;
+  background:radial-gradient(circle,rgba(85,224,178,.28),transparent 65%);
+  transform:translate(-50%,-50%);
+  transition:width .45s ease,height .45s ease;
+  pointer-events:none;
+}
+.skill-tags span:hover{
+  transform:translateY(-6px) rotate(-1deg) scale(1.04);
+  border-color:rgba(85,224,178,.65);
+  background:rgba(255,255,255,.95);
+  box-shadow:0 13px 28px rgba(20,40,31,.11),0 0 0 5px rgba(85,224,178,.05);
+}
+.skill-tags span:hover:before{width:120px;height:120px}
+
+/* Varied scroll entrances: groups/sections do not all rise identically. */
+.reveal{
+  transition:opacity .75s ease,transform .85s cubic-bezier(.2,.8,.2,1);
+}
+.reveal.visible{opacity:1;transform:none}
+.service-grid.stagger>*,
+.work-grid.stagger>*,
+.skill-columns.stagger>*{
+  opacity:1;
+  transform:none;
+}
+.service-grid.stagger.visible>*,
+.work-grid.stagger.visible>*,
+.skill-columns.stagger.visible>*{
+  animation:cardSettle .75s cubic-bezier(.2,.8,.2,1) both;
+}
+.service-grid.stagger.visible>*:nth-child(3n+1){animation-delay:.02s}
+.service-grid.stagger.visible>*:nth-child(3n+2){animation-delay:.10s}
+.service-grid.stagger.visible>*:nth-child(3n){animation-delay:.18s}
+.work-grid.stagger.visible>*:nth-child(odd){animation-delay:.05s}
+.work-grid.stagger.visible>*:nth-child(even){animation-delay:.16s}
+.skill-columns.stagger.visible>*:nth-child(odd){animation-delay:.08s}
+.skill-columns.stagger.visible>*:nth-child(even){animation-delay:.2s}
+@keyframes cardSettle{
+  from{opacity:0;transform:translate3d(0,18px,0) scale(.985)}
+  to{opacity:1;transform:none}
+}
+@keyframes availabilityIn{
+  from{opacity:0;transform:translateY(-10px) scale(.96)}
+  to{opacity:1;transform:none}
+}
+@keyframes availabilityPulse{
+  50%{box-shadow:0 0 0 9px rgba(85,224,178,0),0 0 20px rgba(85,224,178,.5)}
+}
+@keyframes availabilityFloat{
+  50%{transform:translateY(-3px)}
+}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@keyframes skillOrb{to{transform:rotate(360deg)}}
+
+@media(max-width:900px){
+  .availability-front{margin-bottom:20px}
+  .ticker-inner{min-width:100vw}
+  .hero-card{min-height:500px}
+}
+@media(max-width:520px){
+  .availability-front{border-radius:18px;align-items:flex-start}
+  .availability-front strong{width:calc(100% - 18px)}
+  .ticker-inner{gap:17px;padding:15px 16px}
+  .portrait-frame{border-radius:24px 24px 24px 7px}
+}
+@media(prefers-reduced-motion:reduce){
+  .availability-front,.ticker-track,.skills-section:before{animation:none!important}
+}
