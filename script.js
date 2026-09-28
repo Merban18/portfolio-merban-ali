@@ -61,3 +61,15 @@ document.querySelectorAll('.project').forEach(project=>{
     }
   }
 });
+
+/* Hero ambient interaction */
+const hero=document.querySelector('.hero');
+if(hero && window.matchMedia('(pointer:fine)').matches){
+  hero.addEventListener('pointermove',e=>{
+    const r=hero.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    hero.style.setProperty('--mx',x.toFixed(3));
+    hero.style.setProperty('--my',y.toFixed(3));
+  });
+}
