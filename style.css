@@ -354,3 +354,270 @@ body{
 @media(prefers-reduced-motion:reduce){
   .availability-front,.ticker-track,.skills-section:before{animation:none!important}
 }
+
+
+/* ===== SAAS / PRODUCT-STYLE EXPERIENCE ===== */
+:root{
+  --bg:#eef3f0;
+  --surface:#ffffff;
+  --ink:#0a100d;
+  --muted:#64726b;
+  --line:#d8e1dc;
+  --dark:#07100d;
+  --dark2:#0d1813;
+  --accent:#59e5b6;
+  --accent2:#8b7cff;
+}
+body{
+  background:
+    radial-gradient(circle at 6% 12%,rgba(89,229,182,.13),transparent 24%),
+    radial-gradient(circle at 94% 8%,rgba(139,124,255,.11),transparent 25%),
+    linear-gradient(135deg,#f4f7f5 0%,#edf3ef 52%,#f1eef7 100%);
+}
+body:after{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.34;
+  background-image:
+    linear-gradient(rgba(10,16,13,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(10,16,13,.035) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:linear-gradient(to bottom,black,transparent 72%);
+}
+
+/* Availability becomes a deliberate product-status element at the very front. */
+.hero{padding-top:112px}
+.availability-front{
+  position:relative;
+  z-index:10;
+  margin:-66px 0 28px;
+  width:fit-content;
+  box-shadow:0 16px 45px rgba(16,31,24,.09),inset 0 1px rgba(255,255,255,.9);
+}
+.availability-front:after{
+  content:"";
+  position:absolute;inset:-1px;border-radius:inherit;
+  background:linear-gradient(90deg,transparent,rgba(89,229,182,.5),transparent);
+  background-size:220% 100%;
+  animation:statusSweep 3.8s linear infinite;
+  pointer-events:none;opacity:.7;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;
+  padding:1px;
+}
+@keyframes statusSweep{to{background-position:-220% 0}}
+
+/* Capability rail: faster SaaS marquee with hover pause + highlighted keywords. */
+.ticker{
+  position:relative;
+  background:
+    radial-gradient(circle at 50% 100%,rgba(89,229,182,.09),transparent 38%),
+    #07100d;
+  box-shadow:0 22px 60px rgba(4,12,8,.18);
+}
+.ticker:before,.ticker:after{
+  content:"";position:absolute;top:0;bottom:0;width:110px;z-index:2;pointer-events:none;
+}
+.ticker:before{left:0;background:linear-gradient(90deg,#07100d,transparent)}
+.ticker:after{right:0;background:linear-gradient(270deg,#07100d,transparent)}
+.ticker-inner span{transition:color .25s,text-shadow .25s}
+.ticker-inner span:hover{color:var(--accent);text-shadow:0 0 18px rgba(89,229,182,.45)}
+.ticker-inner i{animation:railSpark 1.8s ease-in-out infinite}
+@keyframes railSpark{50%{transform:scale(1.45);opacity:1}}
+
+/* Hero portrait: product-card treatment rather than a normal rectangular photo. */
+.hero-card{perspective:1000px}
+.portrait-frame{
+  width:min(405px,100%);
+  aspect-ratio:4/5.15;
+  border-radius:34px 12px 34px 12px;
+  background:#101713;
+  box-shadow:
+    22px 22px 0 rgba(89,229,182,.13),
+    -12px -12px 0 rgba(139,124,255,.10),
+    0 35px 90px rgba(10,24,17,.20);
+  transform:rotate(2deg) translateZ(0);
+  transition:transform .65s cubic-bezier(.16,1,.3,1),box-shadow .65s ease;
+}
+.portrait-frame:before{
+  inset:11px;
+  border-radius:25px 8px 25px 8px;
+  border:1px solid rgba(255,255,255,.25);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.08),transparent 24%),
+    repeating-linear-gradient(0deg,transparent 0 7px,rgba(255,255,255,.018) 8px);
+  z-index:4;
+}
+.portrait-frame:after{
+  content:"";
+  position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:
+    linear-gradient(120deg,rgba(255,255,255,.13),transparent 25%),
+    linear-gradient(315deg,rgba(89,229,182,.18),transparent 42%),
+    linear-gradient(135deg,transparent 55%,rgba(139,124,255,.16));
+  mix-blend-mode:screen;
+}
+.portrait-frame img{
+  object-fit:cover;
+  object-position:center 18%;
+  filter:saturate(.96) contrast(1.03);
+  transform:scale(1.015);
+}
+.hero-card:hover .portrait-frame{
+  transform:rotate(0deg) translate3d(0,-7px,0) scale(1.025);
+  box-shadow:24px 28px 0 rgba(89,229,182,.17),-15px -14px 0 rgba(139,124,255,.12),0 45px 100px rgba(10,24,17,.23);
+}
+
+/* Floating product metadata around portrait. */
+.hero-card .floating-tech{
+  border:1px solid rgba(255,255,255,.15);
+  background:linear-gradient(135deg,rgba(8,16,13,.96),rgba(19,31,26,.9));
+}
+.hero-card .floating-tech:before{
+  content:"";
+  display:inline-block;width:5px;height:5px;border-radius:50%;
+  margin-right:7px;background:var(--accent);
+  box-shadow:0 0 10px var(--accent);
+  vertical-align:middle;
+}
+
+/* Services become interactive SaaS feature modules. */
+.service-grid{
+  border-radius:26px;
+  border-color:#25342d;
+  background:
+    linear-gradient(135deg,rgba(89,229,182,.035),rgba(139,124,255,.035)),
+    #09120f;
+}
+.service-grid article{
+  min-height:285px;
+  padding:34px;
+  isolation:isolate;
+  transition:transform .55s cubic-bezier(.16,1,.3,1),background .45s,border-color .45s;
+}
+.service-grid article:before{
+  width:170px;height:170px;
+  right:-75px;bottom:-80px;
+  border-color:rgba(89,229,182,.12);
+  transition:transform .7s cubic-bezier(.16,1,.3,1),border-color .4s;
+}
+.service-grid article:after{
+  content:"OPEN  ↗";
+  font-size:8px;letter-spacing:1.5px;
+  border:1px solid #35453d;border-radius:999px;
+  padding:7px 9px;
+  color:#8c9b94;
+}
+.service-grid article:hover{
+  transform:translateY(-10px) scale(1.012);
+  z-index:2;
+  border-color:#3c5a4d;
+}
+.service-grid article:hover:before{transform:scale(1.55);border-color:rgba(89,229,182,.3)}
+.service-grid article:hover h3{transform:translateX(7px)}
+.service-grid article b{
+  display:inline-flex;padding:5px 8px;border:1px solid #314239;border-radius:999px;
+  font-size:8px;letter-spacing:1px;color:#9aa9a2;
+}
+.service-grid h3{margin-top:19px}
+
+/* Skills: hover/focus feels like a SaaS dashboard interaction. */
+.skill-group{
+  padding:28px 24px 20px;
+  border:1px solid rgba(188,201,194,.6);
+  border-radius:22px;
+  background:rgba(255,255,255,.43);
+  box-shadow:0 12px 35px rgba(21,36,28,.04);
+  transition:transform .45s ease,box-shadow .45s ease,border-color .45s ease;
+}
+.skill-group:hover{
+  transform:translateY(-5px);
+  border-color:rgba(89,229,182,.5);
+  box-shadow:0 22px 50px rgba(21,36,28,.09);
+}
+.skill-tags span{
+  will-change:transform;
+  user-select:none;
+}
+.skill-tags span:after{
+  content:"";
+  position:absolute;left:10px;right:10px;bottom:3px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  transform:scaleX(0);transition:transform .35s ease;
+}
+.skill-tags span:hover:after{transform:scaleX(1)}
+.skill-tags span:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}
+
+/* Portfolio: varied entrance directions, depth and magnetic hover. */
+.work-grid{gap:28px}
+.project{
+  border-radius:24px;
+  box-shadow:0 12px 35px rgba(19,31,25,.05);
+  transition:transform .65s cubic-bezier(.16,1,.3,1),box-shadow .45s,border-color .35s;
+}
+.project:nth-child(3n+1){--enterX:-42px;--enterR:-2deg}
+.project:nth-child(3n+2){--enterX:42px;--enterR:2deg}
+.project:nth-child(3n){--enterX:0px;--enterR:0deg}
+.work-grid:not(.visible) .project{
+  opacity:0;
+  transform:translate3d(var(--enterX),28px,0) rotate(var(--enterR)) scale(.96);
+}
+.work-grid.visible .project{
+  opacity:1;
+  transform:none;
+  transition-delay:calc((var(--i,1) - 1) * 55ms);
+}
+.work-grid.visible .project:hover{
+  transform:translateY(-12px) rotateX(2deg) rotateY(-1deg) scale(1.008);
+  box-shadow:0 30px 70px rgba(19,31,25,.14);
+  border-color:#c7d5cd;
+}
+.project-visual{
+  border-bottom:1px solid rgba(216,225,220,.75);
+}
+.project-visual:after{
+  content:"VIEW PROJECT";
+  position:absolute;right:15px;top:15px;
+  padding:7px 9px;border-radius:999px;
+  background:rgba(8,16,13,.82);color:#fff;
+  font-size:7px;font-weight:800;letter-spacing:1.2px;
+  opacity:0;transform:translateY(-7px);
+  transition:.35s ease;
+}
+.project:hover .project-visual:after{opacity:1;transform:none}
+
+/* Section transitions: large background shifts make the page feel like a SaaS product site. */
+.section{position:relative}
+#about{background:linear-gradient(180deg,transparent,rgba(255,255,255,.24),transparent)}
+#work{background:linear-gradient(180deg,rgba(255,255,255,.18),transparent)}
+#experience{background:linear-gradient(180deg,transparent,rgba(89,229,182,.035),transparent)}
+.contact-section{background:
+  radial-gradient(circle at 82% 18%,rgba(139,124,255,.12),transparent 30%),
+  radial-gradient(circle at 12% 85%,rgba(89,229,182,.1),transparent 28%),
+  #07100d;
+}
+
+/* Remove the repetitive "everything rises from bottom" feel. */
+.section-head.reveal{transform:translate3d(-26px,0,0) scale(.98)}
+.section-head.reveal.visible{transform:none}
+.about-grid.reveal{transform:translate3d(0,34px,0) scale(.985)}
+.about-grid.reveal.visible{transform:none}
+.timeline-list.reveal{transform:translate3d(26px,0,0)}
+.timeline-list.reveal.visible{transform:none}
+.contact-grid.reveal{transform:scale(.96)}
+.contact-grid.reveal.visible{transform:none}
+
+@media(max-width:900px){
+  .hero{padding-top:92px}
+  .availability-front{margin:-50px 0 24px}
+  .skill-group{padding:22px 18px}
+}
+@media(max-width:520px){
+  .hero{padding-top:82px}
+  .availability-front{margin:-42px 0 22px;width:100%}
+  .availability-front strong{width:auto}
+  .portrait-frame{width:84%;aspect-ratio:4/5.1}
+  .service-grid article{min-height:250px;padding:28px}
+}
+@media(prefers-reduced-motion:reduce){
+  .portrait-frame,.service-grid article,.skill-group,.project{transition:none!important}
+}
