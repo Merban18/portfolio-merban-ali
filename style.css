@@ -316,15 +316,13 @@ body{
 .service-grid.stagger.visible>*,
 .work-grid.stagger.visible>*,
 .skill-columns.stagger.visible>*{
-  animation:cardSettle .75s cubic-bezier(.2,.8,.2,1) both;
+  animation:none;
 }
-.service-grid.stagger.visible>*:nth-child(3n+1){animation-delay:.02s}
-.service-grid.stagger.visible>*:nth-child(3n+2){animation-delay:.10s}
-.service-grid.stagger.visible>*:nth-child(3n){animation-delay:.18s}
-.work-grid.stagger.visible>*:nth-child(odd){animation-delay:.05s}
-.work-grid.stagger.visible>*:nth-child(even){animation-delay:.16s}
-.skill-columns.stagger.visible>*:nth-child(odd){animation-delay:.08s}
-.skill-columns.stagger.visible>*:nth-child(even){animation-delay:.2s}
+.service-grid.stagger,
+.work-grid.stagger,
+.skill-columns.stagger{
+  will-change:transform,opacity;
+}
 @keyframes cardSettle{
   from{opacity:0;transform:translate3d(0,18px,0) scale(.985)}
   to{opacity:1;transform:none}
