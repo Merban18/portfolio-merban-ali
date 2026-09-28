@@ -23,7 +23,7 @@ document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',
   if(window.innerWidth<=900) links.style.display='none';
 }));
 
-// Scroll reveal + staggered cards
+// Scroll reveals: sections enter as groups, while cards settle with a small rhythm.
 const revealTargets=document.querySelectorAll('.section-head,.about-grid,.timeline-list,.contact-grid,.hero-card');
 revealTargets.forEach(el=>el.classList.add('reveal'));
 document.querySelectorAll('.service-grid,.work-grid,.skill-columns').forEach(el=>el.classList.add('stagger','reveal'));
@@ -35,34 +35,50 @@ const observer=new IntersectionObserver((entries)=>{
       observer.unobserve(entry.target);
     }
   });
-},{threshold:.12,rootMargin:'0px 0px -40px'});
+},{threshold:.10,rootMargin:'0px 0px -50px'});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-// Subtle pointer parallax on the hero image
+// Interactive hero: the image and floating tech respond to the pointer without losing their animations.
 const heroCard=document.querySelector('.hero-card');
 if(heroCard && window.matchMedia('(pointer:fine)').matches){
   heroCard.addEventListener('mousemove',e=>{
     const r=heroCard.getBoundingClientRect();
     const x=(e.clientX-r.left)/r.width-.5;
     const y=(e.clientY-r.top)/r.height-.5;
-    heroCard.style.transform=`perspective(900px) rotateY(${x*5}deg) rotateX(${-y*5}deg) translateY(-2px)`;
+    heroCard.style.setProperty('--tiltX',(-y*3).toFixed(2)+'deg');
+    heroCard.style.setProperty('--tiltY',(x*3).toFixed(2)+'deg');
+    heroCard.style.transform='perspective(1000px) rotateX(var(--tiltX)) rotateY(var(--tiltY)) translateY(-2px)';
   });
-  heroCard.addEventListener('mouseleave',()=>heroCard.style.transform='');
+  heroCard.addEventListener('mouseleave',()=>{
+    heroCard.style.transform='';
+  });
 }
 
-// Keep the live CoolerTracker image pointing to the repository asset.
+// Make every skill pill respond to hover/focus with a tiny magnetic movement.
+document.querySelectorAll('.skill-tags span').forEach(skill=>{
+  skill.addEventListener('pointermove',e=>{
+    if(!window.matchMedia('(pointer:fine)').matches) return;
+    const r=skill.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    skill.style.transform=`translate(${x*5}px,${y*5-5}px) scale(1.04) rotate(${x*1.5}deg)`;
+  });
+  skill.addEventListener('pointerleave',()=>skill.style.transform='');
+});
+
+// Live CoolerTracker image.
 document.querySelectorAll('.project').forEach(project=>{
   const title=project.querySelector('h3');
   if(title && title.textContent.trim()==='CoolerTracker'){
     const image=project.querySelector('.project-visual img');
     if(image){
-      image.src='https://raw.githubusercontent.com/Merban18/portfolio-merban-ali/main/cooler%20tracker.jpg?v=5';
+      image.src='https://raw.githubusercontent.com/Merban18/portfolio-merban-ali/main/cooler%20tracker.jpg?v=6';
       image.alt='CoolerTracker project preview';
     }
   }
 });
 
-/* Hero ambient interaction */
+// Ambient hero glow follows the pointer.
 const hero=document.querySelector('.hero');
 if(hero && window.matchMedia('(pointer:fine)').matches){
   hero.addEventListener('pointermove',e=>{
